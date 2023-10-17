@@ -1,7 +1,4 @@
-import { ObjectId } from 'mongodb';
-
-export class WalkDto {
-  readonly _id: ObjectId;
+export class CreateWalkRequest {
   readonly time: number;
   readonly date: Date;
   readonly distance: number;

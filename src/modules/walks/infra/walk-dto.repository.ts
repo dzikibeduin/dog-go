@@ -12,13 +12,6 @@ export class WalkDtoRepository {
   ) {}
 
   async findAll(): Promise<WalkDto[]> {
-    const walks = await this.walkModel.find().exec();
-    return walks.map((walk) => ({
-      id: walk.id,
-      time: walk.time,
-      date: walk.date,
-      distance: walk.distance,
-      userId: walk.userId,
-    }));
+    return await this.walkModel.find({}, {}, { lean: true });
   }
 }

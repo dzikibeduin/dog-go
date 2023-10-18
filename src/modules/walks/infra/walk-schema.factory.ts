@@ -14,7 +14,7 @@ export class WalkSchemaFactory
       time: walk.getTime(),
       date: walk.getDate(),
       distance: walk.getDistance(),
-      userId: walk.getUserId(),
+      dogOwnerId: walk.getUserId(),
     };
   }
 
@@ -24,7 +24,7 @@ export class WalkSchemaFactory
       entitySchema.time,
       entitySchema.date,
       entitySchema.distance,
-      entitySchema.userId,
+      entitySchema.dogOwnerId,
     );
   }
 }

@@ -13,5 +13,5 @@ export class WalkSchema extends IdentifiableEntitySchema {
   readonly distance: number;
 
   @Prop()
-  readonly userId: string;
+  readonly dogOwnerId: string;
 }

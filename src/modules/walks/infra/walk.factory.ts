@@ -13,14 +13,14 @@ export class WalkFactory implements EntityFactory<Walk> {
     time: number,
     date: Date,
     distance: number,
-    userId: string,
+    dogOwnerId: string,
   ): Promise<Walk> {
     const walk = new Walk(
       new ObjectId().toHexString(),
       time,
       date,
       distance,
-      userId,
+      dogOwnerId,
     );
 
     await this.walkEntityRepository.create(walk);

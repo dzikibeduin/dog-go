@@ -10,9 +10,9 @@ export class CreateWalkHandler implements ICommandHandler<CreateWalkCommand> {
   ) {}
 
   async execute({ req }: CreateWalkCommand): Promise<void> {
-    const { time, date, distance, userId } = req;
+    const { time, date, distance, dogOwnerId } = req;
     const walk = this.eventPublisher.mergeObjectContext(
-      await this.walkFactory.create(time, date, distance, userId),
+      await this.walkFactory.create(time, date, distance, dogOwnerId),
     );
     walk.commit();
   }

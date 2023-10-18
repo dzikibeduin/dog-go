@@ -7,9 +7,9 @@ import { WalkFactory } from './infra/walk.factory';
 import { WalkDtoRepository } from './infra/walk-dto.repository';
 import { WalkEntityRepository } from './infra/walk-entity.repository';
 import { WalkSchemaFactory } from './infra/walk-schema.factory';
-import { CreateWalkCommand } from './app/commands/create-walk/create-walk.command';
-import { WalkCreatedEvent } from './core/walk/events/walk-created.event';
-import { GetDailyWalksQuery } from './app/queries/get-daily-walks/get-daily-walks.query';
+import { GetDailyWalksHandler } from './app/queries/get-daily-walks/get-daily-walks.handler';
+import { WalkCreatedHandler } from './core/walk/events/walk-created.handler';
+import { CreateWalkHandler } from './app/commands/create-walk/create-walk.handler';
 
 @Module({
   imports: [
@@ -27,9 +27,9 @@ import { GetDailyWalksQuery } from './app/queries/get-daily-walks/get-daily-walk
     WalkDtoRepository,
     WalkEntityRepository,
     WalkSchemaFactory,
-    CreateWalkCommand,
-    WalkCreatedEvent,
-    GetDailyWalksQuery,
+    CreateWalkHandler,
+    WalkCreatedHandler,
+    GetDailyWalksHandler,
   ],
 })
 export class WalksModule {}

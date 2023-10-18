@@ -12,7 +12,7 @@ export class WalksController {
     private readonly queryBus: QueryBus,
   ) {}
 
-  @Get()
+  @Get('/daily')
   async getDailyWalks(): Promise<WalkDto[]> {
     return this.queryBus.execute<GetDailyWalksQuery, WalkDto[]>(
       new GetDailyWalksQuery(),

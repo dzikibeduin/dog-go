@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { EntityFactory } from 'src/modules/db/entity.factory';
 import { ObjectId } from 'mongodb';
-import { AccountRegistration } from '../core/account-registration/account-registration.aggregate-root';
+import { AccountRegistration } from '../../core/account-registration/account-registration.aggregate-root';
 import { AccountRegistrationEntityRepository } from './account-registration-entity.repository';
-import { AccountRegisteredEvent } from '../core/account-registration/events/account-registered.event';
+import { AccountRegisteredEvent } from '../../core/account-registration/events/account-registered.event';
 
 @Injectable()
 export class AccountRegistrationFactory

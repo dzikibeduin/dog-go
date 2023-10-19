@@ -1,6 +1,6 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { RegisterAccountCommand } from './register-account.command';
-import { AccountRegistrationFactory } from 'src/modules/platform-access/infra/account-registration.factory';
+import { AccountRegistrationFactory } from 'src/modules/platform-access/infra/registration/account-registration.factory';
 
 @CommandHandler(RegisterAccountCommand)
 export class RegisterAccountHandler

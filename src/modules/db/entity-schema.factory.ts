@@ -5,6 +5,6 @@ export interface EntitySchemaFactory<
   TSchema extends IdentifiableEntitySchema,
   TEntity extends AggregateRoot,
 > {
-  create(enetity: TEntity): TSchema;
+  create(entity: TEntity): TSchema;
   createFromSchema(entitySchema: TSchema): TEntity;
 }

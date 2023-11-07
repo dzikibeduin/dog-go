@@ -11,11 +11,11 @@ export class AccountLoginEntityRepository extends BaseEntityRepository<
   AccountSchema,
   Account
 > {
-  constructor() {
+  constructor(
     @InjectModel(AccountSchema.name)
     accountModel: Model<AccountSchema>,
     accountSchemaFactory: AccountSchemaFactory,
   ) {
     super(accountModel, accountSchemaFactory);
   }
-} //todo
+}

@@ -1,8 +1,7 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AccountLoggedInEvent } from './events/accout-logged-in.event';
-import * as bcrypt from 'bcrypt';
-import { PasswordMustBeStrongRule } from '../account-registration/rules/password-must-be-strong.rule';
 import { UnauthorizedError } from 'src/errors/unathorized.error';
+import { IncomingDataValidationRule } from './rules/incoming-data-validation.rule';
 
 export class Account extends AggregateRoot {
   constructor(
@@ -26,10 +25,14 @@ export class Account extends AggregateRoot {
   }
 
   login(password: string): void {
-    if (new PasswordMustBeStrongRule(password).isSatisfied() === false) {
+    if (
+      new IncomingDataValidationRule(
+        password,
+        this.getPassword(),
+      ).isSatisfied() === false
+    ) {
       throw new UnauthorizedError();
     }
-    bcrypt.compare(password, this.getPassword()); //zapytac milczka ewentualnie internety
     this.apply(new AccountLoggedInEvent(this.getId()));
   }
 }

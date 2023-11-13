@@ -29,7 +29,7 @@ export class Account extends AggregateRoot {
     if (new PasswordMustBeStrongRule(password).isSatisfied() === false) {
       throw new UnauthorizedError();
     }
-    bcrypt.compare(password, hashedPassword); //todo
+    bcrypt.compare(password, this.getPassword()); //zapytac milczka ewentualnie internety
     this.apply(new AccountLoggedInEvent(this.getId()));
   }
 }

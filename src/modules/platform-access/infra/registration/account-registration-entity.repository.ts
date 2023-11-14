@@ -4,7 +4,7 @@ import { AccountRegistration } from '../../core/account-registration/account-reg
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AccountSchema } from '../account.schema';
-import { AccountSchemaFactory } from '../account-schema.factory';
+import { AccountRegistrationSchemaFactory } from '../account-registration-schema.factory';
 
 @Injectable()
 export class AccountRegistrationEntityRepository extends BaseEntityRepository<
@@ -14,7 +14,7 @@ export class AccountRegistrationEntityRepository extends BaseEntityRepository<
   constructor(
     @InjectModel(AccountSchema.name)
     accountModel: Model<AccountSchema>,
-    accountRegistrationSchemaFactory: AccountSchemaFactory,
+    accountRegistrationSchemaFactory: AccountRegistrationSchemaFactory,
   ) {
     super(accountModel, accountRegistrationSchemaFactory);
   }

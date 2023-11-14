@@ -16,5 +16,5 @@ export class RegisterAccountHandler
       await this.accountRegistrationFactory.create(email, password),
     );
     account.commit();
-  }
+  } // todo check if email already exists
 }

@@ -7,7 +7,10 @@ import { AccountSchemaFactory } from './infra/account-schema.factory';
 import { AccountRegistrationEntityRepository } from './infra/registration/account-registration-entity.repository';
 import { AccountRegistrationFactory } from './infra/registration/account-registration.factory';
 import { RegisterAccountHandler } from './app/commands/register-account/register-account.handler';
-import { AccountRegisteredHandler } from './core/account-registration/events/account-registered.handler';
+import { AccountRegistrationSchemaFactory } from './infra/account-registration-schema.factory';
+import { LoginAccountHandler } from './app/commands/login/login-account.handler';
+import { AccountLoginFactory } from './infra/login/account-login.factory';
+import { AccountLoginEntityRepository } from './infra/login/account-login-entity.factory';
 
 @Module({
   imports: [
@@ -23,10 +26,13 @@ import { AccountRegisteredHandler } from './core/account-registration/events/acc
   providers: [
     AccountRegistrationFactory,
     AccountSchemaFactory,
+    AccountLoginEntityRepository,
+    AccountLoginFactory,
+    AccountRegistrationSchemaFactory,
     AccountRegistrationEntityRepository,
     AccountRegistrationFactory,
     RegisterAccountHandler,
-    AccountRegisteredHandler,
+    LoginAccountHandler,
   ],
 })
 export class PlatformAccessModule {}

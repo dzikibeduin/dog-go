@@ -11,6 +11,7 @@ import { AccountRegistrationSchemaFactory } from './infra/account-registration-s
 import { LoginAccountHandler } from './app/commands/login/login-account.handler';
 import { AccountLoginFactory } from './infra/login/account-login.factory';
 import { AccountLoginEntityRepository } from './infra/login/account-login-entity.factory';
+import { AccountRepositoryImpl } from './infra/login/account.repository';
 
 @Module({
   imports: [
@@ -33,6 +34,10 @@ import { AccountLoginEntityRepository } from './infra/login/account-login-entity
     AccountRegistrationFactory,
     RegisterAccountHandler,
     LoginAccountHandler,
+    {
+      provide: 'AccountRepository',
+      useClass: AccountRepositoryImpl,
+    },
   ],
 })
 export class PlatformAccessModule {}

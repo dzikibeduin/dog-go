@@ -1,14 +1,14 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { LoginAccountCommand } from './login-account.command';
-import { AccountRepository } from 'src/modules/platform-access/infra/account.repository';
 import { JwtService } from '@nestjs/jwt';
+import { AccountRepositoryImpl } from 'src/modules/platform-access/infra/login/account.repository';
 
 @CommandHandler(LoginAccountCommand)
 export class LoginAccountHandler
   implements ICommandHandler<LoginAccountCommand>
 {
   constructor(
-    private readonly accountRepository: AccountRepository,
+    private readonly accountRepository: AccountRepositoryImpl,
     private readonly eventPublisher: EventPublisher,
     private readonly jwtService: JwtService,
   ) {}

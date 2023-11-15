@@ -1,11 +1,13 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { WalkDto } from '../dtos/walk.dto';
 import { GetDailyWalksQuery } from '../app/queries/get-daily-walks/get-daily-walks.query';
 import { CreateWalkRequest } from '../dtos/create-walk-request.dto';
 import { CreateWalkCommand } from '../app/commands/create-walk/create-walk.command';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Controller('walks')
+@UseGuards(AuthenticationGuard)
 export class WalksController {
   constructor(
     private readonly commandBus: CommandBus,

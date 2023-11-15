@@ -1,5 +1,5 @@
-import { Body, Controller, Post, Response } from '@nestjs/common';
-import { Response as ExpressResponse } from 'express';
+import { Body, Controller, Next, Post, Response } from '@nestjs/common';
+import { Response as ExpressResponse, NextFunction } from 'express';
 import { CommandBus } from '@nestjs/cqrs';
 import { RegisterAccountCommand } from '../app/commands/register-account/register-account.command';
 import { RegisterAccountRequestDTO } from '../dtos/register-account.dto';
@@ -23,10 +23,17 @@ export class PlatformAccessController {
   async login(
     @Body() loginAcountrequestDTO: LoginAccountRequestDTO,
     @Response() res: ExpressResponse,
+    @Next() next: NextFunction,
   ) {
-    await this.commandBus.execute<LoginAccountCommand, void>(
-      new LoginAccountCommand(loginAcountrequestDTO),
-    );
-    res.status(200).json({ accessToken: res });
+    await this.commandBus
+      .execute<LoginAccountCommand, void>(
+        new LoginAccountCommand(loginAcountrequestDTO),
+      )
+      .then((accessToken) =>
+        res.status(200).json({
+          accessToken,
+        }),
+      )
+      .catch(next);
   }
 }

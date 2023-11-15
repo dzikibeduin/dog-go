@@ -12,6 +12,7 @@ import { LoginAccountHandler } from './app/commands/login/login-account.handler'
 import { AccountLoginFactory } from './infra/login/account-login.factory';
 import { AccountLoginEntityRepository } from './infra/login/account-login-entity.factory';
 import { AccountRepositoryImpl } from './infra/login/account.repository';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -22,6 +23,10 @@ import { AccountRepositoryImpl } from './infra/login/account.repository';
         schema: SchemaFactory.createForClass(AccountSchema),
       },
     ]),
+    JwtModule.register({
+      secret: 'secret',
+      signOptions: { expiresIn: '60s' },
+    }),
   ],
   controllers: [PlatformAccessController],
   providers: [
@@ -35,7 +40,7 @@ import { AccountRepositoryImpl } from './infra/login/account.repository';
     RegisterAccountHandler,
     LoginAccountHandler,
     {
-      provide: 'AccountRepository',
+      provide: 'accountRepository',
       useClass: AccountRepositoryImpl,
     },
   ],

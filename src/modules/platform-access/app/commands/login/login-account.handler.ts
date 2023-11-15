@@ -20,14 +20,10 @@ export class LoginAccountHandler
     const account = await this.accountRepository.findByEmail(email);
 
     if (!account) {
-      throw new HttpException('Not Found', 404);
+      throw new HttpException('Account not found', 401);
     }
 
     this.eventPublisher.mergeObjectContext(account);
-
-    // if (!account || !(await account.validatePassword(password))) {
-    //   throw new HttpException('Invalid login credentials', 401);
-    // }
 
     await account.login(password);
     account.commit();

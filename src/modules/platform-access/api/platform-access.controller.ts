@@ -1,4 +1,11 @@
-import { Body, Controller, Next, Post, Response } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpStatus,
+  Next,
+  Post,
+  Response,
+} from '@nestjs/common';
 import { Response as ExpressResponse, NextFunction } from 'express';
 import { CommandBus } from '@nestjs/cqrs';
 import { RegisterAccountCommand } from '../app/commands/register-account/register-account.command';
@@ -30,7 +37,7 @@ export class PlatformAccessController {
         new LoginAccountCommand(loginAcountrequestDTO),
       )
       .then((accessToken) =>
-        res.status(200).json({
+        res.status(HttpStatus.OK).json({
           accessToken,
         }),
       )

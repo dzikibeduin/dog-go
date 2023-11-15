@@ -1,7 +1,7 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { LoginAccountCommand } from './login-account.command';
 import { JwtService } from '@nestjs/jwt';
-import { Inject } from '@nestjs/common';
+import { HttpException, Inject } from '@nestjs/common';
 import { AccountRepository } from 'src/modules/platform-access/core/account/account.repository';
 
 @CommandHandler(LoginAccountCommand)
@@ -17,9 +17,13 @@ export class LoginAccountHandler
 
   async execute({ req }: LoginAccountCommand) {
     const { email, password } = req;
-    const account = this.eventPublisher.mergeObjectContext(
-      await this.accountRepository.findByEmail(email),
-    );
+    const account = await this.accountRepository.findByEmail(email);
+
+    if (!account) {
+      throw new HttpException('Not Found', 404);
+    }
+
+    this.eventPublisher.mergeObjectContext(account);
 
     await account.login(password);
     account.commit();

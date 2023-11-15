@@ -24,13 +24,14 @@ export class Account extends AggregateRoot {
     return this.password;
   }
 
-  login(password: string): void {
-    if (
-      new IncomingDataValidationRule(
-        password,
-        this.getPassword(),
-      ).isSatisfied() === false
-    ) {
+  async login(password: string): Promise<void> {
+    const incomingDataValidationRule = new IncomingDataValidationRule(
+      password,
+      this.getPassword(),
+    );
+    const isSatisfied = await incomingDataValidationRule.isSatisfied();
+    console.log(isSatisfied);
+    if (isSatisfied === false) {
       throw new HttpException('Unauthorized', 401);
     }
     this.apply(new AccountLoggedInEvent(this.getId()));

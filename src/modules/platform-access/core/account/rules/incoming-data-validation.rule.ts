@@ -6,7 +6,7 @@ export class IncomingDataValidationRule {
     private readonly hashedPassword: string,
   ) {}
 
-  isSatisfied(): boolean {
-    return bcrypt.compare(this.password, this.hashedPassword); //zapytac milczka ewentualnie internety
+  async isSatisfied(): Promise<boolean> {
+    return await bcrypt.compare(this.password, this.hashedPassword); //zapytac milczka ewentualnie internety
   }
 }

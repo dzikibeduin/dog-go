@@ -25,6 +25,10 @@ export class LoginAccountHandler
 
     this.eventPublisher.mergeObjectContext(account);
 
+    // if (!account || !(await account.validatePassword(password))) {
+    //   throw new HttpException('Invalid login credentials', 401);
+    // }
+
     await account.login(password);
     account.commit();
 

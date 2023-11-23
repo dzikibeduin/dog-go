@@ -13,9 +13,6 @@ export class RegisterAccountHandler
   async execute({ req }: RegisterAccountCommand): Promise<void> {
     const { email, password } = req;
 
-    const account = this.eventPublisher.mergeObjectContext(
-      await this.accountRegistrationFactory.create(email, password),
-    );
-    account.commit();
+    await this.accountRegistrationFactory.create(email, password);
   } // todo check if email already exists
 }

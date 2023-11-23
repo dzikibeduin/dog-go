@@ -18,4 +18,11 @@ export class AccountRegistrationEntityRepository extends BaseEntityRepository<
   ) {
     super(accountModel, accountRegistrationSchemaFactory);
   }
+
+  async findByEmail(email: string): Promise<AccountRegistration> {
+    const account = await this.findOne({
+      email,
+    });
+    return account;
+  }
 }

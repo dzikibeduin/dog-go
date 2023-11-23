@@ -1,8 +1,8 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AccountLoggedInEvent } from './events/accout-logged-in.event';
 import { IncomingDataValidationRule } from './rules/incoming-data-validation.rule';
-import { HttpException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
+import { UnauthorizedException } from '@nestjs/common';
 
 export class Account extends AggregateRoot {
   constructor(
@@ -34,7 +34,7 @@ export class Account extends AggregateRoot {
     console.log(isSatisfied);
     console.log(isSatisfied);
     if (isSatisfied === false) {
-      throw new HttpException('Unauthorized', 401);
+      throw new UnauthorizedException();
     }
     this.apply(new AccountLoggedInEvent(this.getId()));
   }

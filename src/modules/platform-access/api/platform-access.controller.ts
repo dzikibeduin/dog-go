@@ -23,7 +23,6 @@ export class PlatformAccessController {
     @Response() res: ExpressResponse,
     @Next() next: NextFunction,
   ): Promise<void> {
-    console.log('registerAccountRequestDTO', registerAccountRequestDTO);
     await this.commandBus
       .execute<RegisterAccountCommand, void>(
         new RegisterAccountCommand(registerAccountRequestDTO),

@@ -31,7 +31,6 @@ export class AccountRegistrationEntityRepository extends BaseEntityRepository<
         return null;
       }
 
-      // Rzuć ponownie, jeśli to jest inny błąd
       throw error;
     }
   }

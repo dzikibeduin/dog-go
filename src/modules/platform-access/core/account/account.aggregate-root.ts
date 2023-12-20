@@ -30,8 +30,7 @@ export class Account extends AggregateRoot {
       this.getPassword(),
     );
     const isSatisfied = await incomingDataValidationRule.isSatisfied();
-    console.log(isSatisfied);
-    console.log(isSatisfied);
+
     if (isSatisfied === false) {
       throw new UnauthorizedException();
     }

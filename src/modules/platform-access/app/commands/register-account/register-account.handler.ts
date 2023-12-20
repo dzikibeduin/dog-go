@@ -12,6 +12,7 @@ export class RegisterAccountHandler
     private readonly accountRegistrationFactory: AccountRegistrationFactory,
     private readonly accountRegistrationEntityRepository: AccountRegistrationEntityRepository,
   ) {}
+
   async execute({ req }: RegisterAccountCommand): Promise<void> {
     const { email, password } = req;
 

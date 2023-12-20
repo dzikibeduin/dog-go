@@ -20,10 +20,16 @@ export class PlatformAccessController {
   @Post('register')
   async register(
     @Body() registerAccountRequestDTO: RegisterAccountRequestDTO,
+    @Response() res: ExpressResponse,
+    @Next() next: NextFunction,
   ): Promise<void> {
-    await this.commandBus.execute<RegisterAccountCommand, void>(
-      new RegisterAccountCommand(registerAccountRequestDTO),
-    );
+    console.log('registerAccountRequestDTO', registerAccountRequestDTO);
+    await this.commandBus
+      .execute<RegisterAccountCommand, void>(
+        new RegisterAccountCommand(registerAccountRequestDTO),
+      )
+      .then(() => res.status(HttpStatus.CREATED).send())
+      .catch(next);
   }
 
   @Post('login')

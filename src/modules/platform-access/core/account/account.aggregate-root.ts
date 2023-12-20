@@ -1,7 +1,6 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AccountLoggedInEvent } from './events/accout-logged-in.event';
 import { IncomingDataValidationRule } from './rules/incoming-data-validation.rule';
-import * as bcrypt from 'bcrypt';
 import { UnauthorizedException } from '@nestjs/common';
 
 export class Account extends AggregateRoot {
@@ -22,7 +21,7 @@ export class Account extends AggregateRoot {
   }
 
   getPassword(): string {
-    return bcrypt.hash(this.password);
+    return this.password;
   }
 
   async login(password: string): Promise<void> {

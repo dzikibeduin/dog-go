@@ -19,10 +19,20 @@ export class AccountRegistrationEntityRepository extends BaseEntityRepository<
     super(accountModel, accountRegistrationSchemaFactory);
   }
 
-  async findByEmail(email: string): Promise<AccountRegistration> {
-    const account = await this.findOne({
-      email,
-    });
-    return account;
+  async findByEmail(email: string): Promise<AccountRegistration | null> {
+    try {
+      const account = await this.findOne({
+        email,
+      });
+
+      return account;
+    } catch (error) {
+      if (error.message === 'Entity not found') {
+        return null;
+      }
+
+      // Rzuć ponownie, jeśli to jest inny błąd
+      throw error;
+    }
   }
 }

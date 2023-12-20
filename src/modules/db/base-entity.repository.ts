@@ -8,7 +8,7 @@ export abstract class BaseEntityRepository<
   TSchema extends IdentifiableEntitySchema,
   TEntity extends AggregateRoot,
 > extends EntityRepository<TSchema, TEntity> {
-  async findOneById(id: string): Promise<TEntity> {
+  async findOneById(id: string): Promise<TEntity | null> {
     return this.findOne({
       _id: new ObjectId(id),
     } as FilterQuery<TSchema>);
@@ -23,5 +23,16 @@ export abstract class BaseEntityRepository<
 
   async findAll(): Promise<TEntity[]> {
     return this.find({});
+  }
+
+  async findByEmail(email: string): Promise<TEntity | null> {
+    try {
+      return await this.findOne({ email } as FilterQuery<TSchema>);
+    } catch (error) {
+      if (error.message === 'Entity not found') {
+        return null;
+      }
+      throw error;
+    }
   }
 }

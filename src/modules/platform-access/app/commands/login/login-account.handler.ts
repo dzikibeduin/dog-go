@@ -1,4 +1,4 @@
-import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { LoginAccountCommand } from './login-account.command';
 import { JwtService } from '@nestjs/jwt';
 import { HttpException, Inject } from '@nestjs/common';
@@ -11,7 +11,6 @@ export class LoginAccountHandler
   constructor(
     @Inject('accountRepository')
     private readonly accountRepository: AccountRepository,
-    private readonly eventPublisher: EventPublisher,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -23,10 +22,7 @@ export class LoginAccountHandler
       throw new HttpException('Account not found', 401);
     }
 
-    this.eventPublisher.mergeObjectContext(account);
-
     await account.login(password);
-    account.commit();
 
     const accessToken = this.jwtService.sign({
       email: account.getEmail(),

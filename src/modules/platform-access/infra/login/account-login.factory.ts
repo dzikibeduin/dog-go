@@ -3,7 +3,6 @@ import { EntityFactory } from 'src/modules/db/entity.factory';
 import { Account } from '../../core/account/account.aggregate-root';
 import { ObjectId } from 'mongodb';
 import { AccountLoginEntityRepository } from './account-login-entity.factory';
-import { AccountLoggedInEvent } from '../../core/account/events/accout-logged-in.event';
 
 @Injectable()
 export class AccountLoginFactory implements EntityFactory<Account> {
@@ -19,8 +18,6 @@ export class AccountLoginFactory implements EntityFactory<Account> {
     );
 
     await this.accountLoginEntityRepository.create(accountLogin);
-
-    accountLogin.apply(new AccountLoggedInEvent(accountLogin.getId()));
     return accountLogin;
   }
 }

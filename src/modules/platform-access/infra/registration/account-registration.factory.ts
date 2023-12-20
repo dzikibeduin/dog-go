@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { EntityFactory } from 'src/modules/db/entity.factory';
 import { ObjectId } from 'mongodb';
 import { AccountRegistration } from '../../core/account-registration/account-registration.aggregate-root';
@@ -13,13 +13,6 @@ export class AccountRegistrationFactory
   ) {}
 
   async create(email: string, password: string): Promise<AccountRegistration> {
-    const existingAccount =
-      await this.accountRegistrationEntityRepository.findByEmail(email);
-
-    if (existingAccount) {
-      throw new HttpException('Email already exists', HttpStatus.BAD_REQUEST);
-    }
-
     const accountRegistration = new AccountRegistration(
       new ObjectId().toHexString(),
       email,

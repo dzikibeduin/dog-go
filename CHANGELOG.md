@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/dzikibeduin/dog-go/compare/v0.0.4...v0.0.5) (2023-12-21)
+
+
+### Features
+
+* versionrc file added ([f6a0a27](https://github.com/dzikibeduin/dog-go/commit/f6a0a279c59a560aad971ff8fba01f1f77657479))
+
 ### [0.0.4](https://github.com/dzikibeduin/dog-go/compare/v0.0.3...v0.0.4) (2023-12-21)
 
 ### [0.0.3](https://github.com/dzikibeduin/dog-go/compare/v0.0.2...v0.0.3) (2023-12-21)

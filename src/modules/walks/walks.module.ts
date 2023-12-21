@@ -10,6 +10,8 @@ import { WalkSchemaFactory } from './infra/walk-schema.factory';
 import { GetDailyWalksHandler } from './app/queries/get-daily-walks/get-daily-walks.handler';
 import { WalkCreatedHandler } from './core/walk/events/walk-created.handler';
 import { CreateWalkHandler } from './app/commands/create-walk/create-walk.handler';
+import { JwtModule } from '@nestjs/jwt';
+import { AuthenticationGuard } from 'src/guards/authentication.guard';
 
 @Module({
   imports: [
@@ -20,9 +22,14 @@ import { CreateWalkHandler } from './app/commands/create-walk/create-walk.handle
         schema: SchemaFactory.createForClass(WalkSchema),
       },
     ]),
+    JwtModule.register({
+      secret: 'secret',
+      signOptions: { expiresIn: '60s' },
+    }),
   ],
   controllers: [WalksController],
   providers: [
+    AuthenticationGuard,
     WalkFactory,
     WalkDtoRepository,
     WalkEntityRepository,

@@ -1,19 +1,13 @@
-import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateWalkCommand } from './create-walk.command';
 import { WalkFactory } from 'src/modules/walks/infra/walk.factory';
 
 @CommandHandler(CreateWalkCommand)
 export class CreateWalkHandler implements ICommandHandler<CreateWalkCommand> {
-  constructor(
-    private readonly walkFactory: WalkFactory,
-    private readonly eventPublisher: EventPublisher,
-  ) {}
+  constructor(private readonly walkFactory: WalkFactory) {}
 
   async execute({ req }: CreateWalkCommand): Promise<void> {
     const { time, date, distance, dogOwnerId } = req;
-    const walk = this.eventPublisher.mergeObjectContext(
-      await this.walkFactory.create(time, date, distance, dogOwnerId),
-    );
-    walk.commit();
+    await this.walkFactory.create(time, date, distance, dogOwnerId);
   }
 }

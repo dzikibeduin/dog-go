@@ -14,4 +14,17 @@ export class WalkDtoRepository {
   async findAll(): Promise<WalkDto[]> {
     return await this.walkModel.find({}, {}, { lean: true });
   }
+
+  async findByDateRange(startDate: Date, endDate: Date): Promise<WalkDto[]> {
+    return await this.walkModel.find(
+      {
+        date: {
+          $gte: startDate,
+          $lte: endDate,
+        },
+      },
+      {},
+      { lean: true },
+    );
+  }
 }

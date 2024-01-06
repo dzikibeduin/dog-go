@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/dzikibeduin/dog-go/compare/v0.0.5...v0.0.6) (2024-01-06)
+
+
+### Features
+
+* **monthly-walks-query:** user can now search for monthly walks ([e7d2955](https://github.com/dzikibeduin/dog-go/commit/e7d2955d50d1d751a47344a1dfca8a47a64ec761))
+
+
+### Bug Fixes
+
+* **get-daily-walks-handler:** now return daily query, not all ([6f43dfd](https://github.com/dzikibeduin/dog-go/commit/6f43dfdc18475373ba453f938775048379b7461f))
+
 ### [0.0.5](https://github.com/dzikibeduin/dog-go/compare/v0.0.4...v0.0.5) (2023-12-21)
 
 
